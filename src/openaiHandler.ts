@@ -1,3 +1,4 @@
+import { encode, decode } from "gpt-3-encoder";
 import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
@@ -10,17 +11,18 @@ export async function summarizePosts(content: string[]) {
     return null;
   }
 
+  const encoded = encode(content.join("\n\n"));
+  // TODO: start using number of tokens to determine max_tokens and to split up the content
+  const numTokens = encoded.length;
+
   const promises = content.map(async (paragraph) => {
     const prompt = `${paragraph.trim()}\n\nTl;dr`;
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: prompt,
-      temperature: 0.7,
       max_tokens: 2048,
-      top_p: 1.0,
-      frequency_penalty: 0.0,
-      presence_penalty: 1,
+      temperature: 0.6,
     });
 
     return response.data.choices[0].text;
