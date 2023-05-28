@@ -22,6 +22,7 @@
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
     "firebase": "^9.22.1",
+    "gpt-3-encoder": "^1.1.4",
     "node-fetch": "^2.6.11",
     "openai": "^3.2.1"
   }
