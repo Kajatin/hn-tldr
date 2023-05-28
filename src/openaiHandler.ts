@@ -14,6 +14,7 @@ export async function summarizePosts(content: string[]) {
   const encoded = encode(content.join("\n\n"));
   // TODO: start using number of tokens to determine max_tokens and to split up the content
   const numTokens = encoded.length;
+  console.log(`Number of tokens: ${numTokens}`);
 
   const promises = content.map(async (paragraph) => {
     const prompt = `${paragraph.trim()}\n\nTl;dr`;
